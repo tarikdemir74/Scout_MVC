@@ -5,10 +5,14 @@ using ScoutDAL.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ScoutModels.ViewModels;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using ScoutUtility;
 
 namespace ItemScout74.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
+
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

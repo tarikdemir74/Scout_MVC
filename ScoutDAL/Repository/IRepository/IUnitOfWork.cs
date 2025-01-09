@@ -10,6 +10,14 @@ namespace ScoutDAL.Repository.IRepository
     {
         ICategoryRepository Category { get; }
         IProductRepository Product { get; }
+        IStoreRepository Store { get; }
+        IShoppingCartRepository ShoppingCart { get; }
+
+        IApplicationUserRepository ApplicationUser { get; }
+
+        IOrderDetailRepository OrderDetail { get; }
+        IOrderHeaderRepository OrderHeader { get; }
+       
         void Save();
     }
 }

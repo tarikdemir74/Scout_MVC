@@ -1,11 +1,14 @@
 ﻿
 using ScoutModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 
 namespace ScoutDAL.Data
 {
-	public class ApplicationDbContext : DbContext
+	public class ApplicationDbContext : IdentityDbContext<IdentityUser>
 	{
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
 		{
@@ -13,10 +16,52 @@ namespace ScoutDAL.Data
 		}
 		public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+        public DbSet<OrderHeader> OrderHeaders { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-			modelBuilder.Entity<Category>().HasData(
+
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Store>().HasData(
+                new Store
+                {
+                    Id = 1,
+                    Name = "Tech Solution",
+                    Street = "123 Tech St",
+                    City = "Tech City",
+                    PostalCode = "12121",
+                  
+                    PhoneNumber = "6669990000"
+                },
+                new Store
+                {
+                    Id = 2,
+                    Name = "Vivid Books",
+                    Street = "999 Vid St",
+                    City = "Vid City",
+                    PostalCode = "66666",
+                    
+                    PhoneNumber = "7779990000"
+                },
+                new Store
+                {
+                    Id = 3,
+                    Name = "Readers Club",
+                    Street = "999 Main St",
+                    City = "Lala land",
+                    PostalCode = "99999",
+                    
+                    PhoneNumber = "1113335555"
+                }
+                );
+
+            modelBuilder.Entity<Category>().HasData(
 				new Category { Id = 1, Name = "Action", DisplayOrder = 1},
 
                 new Category { Id = 2, Name = "Sci-Fi", DisplayOrder = 2},

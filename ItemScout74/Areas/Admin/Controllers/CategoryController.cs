@@ -2,10 +2,13 @@
 using ScoutModels;
 using Microsoft.AspNetCore.Mvc;
 using ScoutDAL.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
+using ScoutUtility;
 
 namespace ItemScout74.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
