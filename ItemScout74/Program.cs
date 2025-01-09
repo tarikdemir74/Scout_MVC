@@ -5,6 +5,7 @@ using ScoutDAL.Repository;
 using Microsoft.AspNetCore.Identity;
 using ScoutUtility;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using ScoutModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +34,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IEmailSender,EmailSender>();
 
-
+var section = builder.Configuration.GetSection(nameof(AppSettings));
+section.Bind(new AppSettings());
 
 var app = builder.Build();
 
